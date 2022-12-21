@@ -45,6 +45,6 @@ class C implements B{
 
     public function d()
     {
-       
+
     }
 }
