@@ -30,5 +30,88 @@ TIMESTAMP : Desteklenen aralık ‘1970-01-01 00:00:00’ ile 2037 yılında her
 TIME : Sadece saat verisi saklamak için kullanılır. Desteklenen aralık ‘-838:59:59’ ile ‘838:59:59’ arasındadır. MySQL TIME değerlerini ‘HH:MM:SS’ biçiminde gösterir.
 YEAR: 2 veya 4 basamaklı yıl bilgisini saklamak için kullanılır. Dört basamaklı verilerde 1901 ile 2155 arası değer saklanır. İki basamaklı verilerde ise 70 ile 69 (1970 ile 2069) arası değerler saklanır.
 
+Tablo İşlemleri
+
+Tablo oluşturma
+CREATE TABLE db_name (
+    id INT(11)
+);
+Tabloları Listeleme
+  SHOW TABLES;
+Tablo Hakkında Bilgi Alma
+  EXPLAIN db_name;
+Tablo Yeniden İsimlendirme
+RENAME TABLE db_name TO new_db_name
+Tabloyu Silme
+DROP TABLE db_name;
+Tabloya Sütun Ekleme
+ALTER TABLE db_name ADD COLUMN isim VARCHAR(100);
+Tabloya Birden Fazla Sütun Ekleme
+ALTER TABLE db_name ADD COLUMN(
+    soyisim VARCHAR(50),
+    maas DECIMAL(10,2)
+);
+Tablonun Belirli Bir Yerine Sütun Ekleme
+ALTER TABLE db_name ADD COLUMN telefon VARCHAR(50) AFTER soyisim;
+
+Tablonun Başına Eklemek İçin
+ALTER TABLE db_name ADD COLUMN eposta VARCHAR(50) FIRST;
+
+Tablodan Sütun Silmek
+ALTER TABLE db_name DROP COLUMN eposta;
+Sütunu Yeniden Adlandırmak
+ALTER TABLE db_name CHANGE soyisim kullanici_adi VARCHAR(150);
+PRIMARY KEY Beliryerek Tablo Oluşturma
+CREATE TABLE test1 (
+    id int(11),
+    isim VARCHAR(100),
+    PRIMARY KEY (id)
+);
+İkili Primary Key Belirleme
+CREATE TABLE test2 (
+    id int(11),
+    isim VARCHAR(100),
+    PRIMARY KEY (id,isim)
+);
+PRIMARY KEY Silme
+ALTER TABLE test2 DROP PRIMARY KEY;
+PRIMARY KEY Silme
+ALTER TABLE test2 ADD PRIMARY KEY (id);
+Birden Fazla Tabloyu Silmek
+DROP TABLES test, test1, test2;
+AUTO_INCREMENT
+CREATE TABLE test (
+	id INT(11) AUTO_INCREMENT,
+	isim VARCHAR(50),
+	PRIMARY KEY (id)
+)
+NOT NULL
+CREATE TABLE test (
+	id INT(11) AUTO_INCREMENT,
+	isim VARCHAR(50) NOT NULL,
+	soyisim VARCHAR(50) NOT NULL,
+	PRIMARY KEY (id)
+)
+CHARSET AYARLAMA
+CREATE TABLE test (
+	id INT(11) AUTO_INCREMENT,
+	isim VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+	soyisim VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+	PRIMARY KEY (id)
+)
+CHARSET ve NOT NULL Günceleme
+ALTER TABLE test CHANGE isim isim #isim değiştirmediğimiz için iki kere isim yazıyoruz VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_turkish_ci NULL DEFAULT NULL;
+Varsayılan Değer Atama
+ALTER TABLE test
+    CHANGE isim isim #isim değiştirmediğimiz için iki kere isim yazıyoruz
+    VARCHAR(50)
+    CHARACTER SET utf8 COLLATE utf8_turkish_ci
+    NULL DEFAULT 'isimsiz_kisi';
+Sütun Açıklaması
+ALTER TABLE test
+    CHANGE isim isim #isim değiştirmediğimiz için iki kere isim yazıyoruz
+    VARCHAR(50)
+    CHARACTER SET utf8 COLLATE utf8_turkish_ci
+    NULL DEFAULT 'isimsiz_kisi';
  */
 
